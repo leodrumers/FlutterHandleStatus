@@ -1,16 +1,18 @@
-# managing_flutter_status
+# Managing flutter Status
 
-Application to show the way to handle the flutter status using provider, singleton, bloc
+Application to show how to handle the variety of options that flutter has to manage de application status
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project will help you to understad the next state managment:
 
-A few resources to get you started if this is your first Flutter project:
+- Singleton
+- Provider
+- Cubit
+- Bloc
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
+A few resources to get you started:
+
+- [Lab: State management](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple)
 - [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
