@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:managing_flutter_status/models/user.dart';
-import 'package:managing_flutter_status/services/user_service.dart';
 
 class Page2 extends StatelessWidget {
   static final String routeName = 'page2';
@@ -8,25 +6,18 @@ class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          title: StreamBuilder(
-        stream: userService.streamController,
-        builder: (BuildContext context, AsyncSnapshot<User> snapshot) {
-          return snapshot.hasData
-              ? Text(userService.user.name)
-              : Text('Page 2', style: TextStyle(color: Colors.white));
-        },
-      )),
+      appBar: AppBar(title: Text('Page2')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             MaterialButton(
               color: Colors.blue,
-              child: Text('Set user', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                userService.setUser(User(name: 'Leo', age: 28));
-              },
+              child: Text(
+                'Set user',
+                style: TextStyle(color: Colors.white),
+              ),
+              onPressed: () {},
             ),
             MaterialButton(
               color: Colors.blue,
@@ -34,9 +25,7 @@ class Page2 extends StatelessWidget {
                 'Change age',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {
-                userService.setAge(29);
-              },
+              onPressed: () {},
             ),
             MaterialButton(
               color: Colors.blue,
