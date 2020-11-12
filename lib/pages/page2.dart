@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:managing_flutter_status/bloc/user/user_cubit.dart';
+import 'package:managing_flutter_status/models/user.dart';
 
 class Page2 extends StatelessWidget {
   static final String routeName = 'page2';
 
   @override
   Widget build(BuildContext context) {
+    UserCubit userCubit = context.watch()<UserCubit>();
+
     return Scaffold(
       appBar: AppBar(title: Text('Page2')),
       body: Center(
@@ -17,7 +22,13 @@ class Page2 extends StatelessWidget {
                 'Set user',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                User user = User(
+                    name: 'Leo',
+                    age: 28,
+                    professions: ['Android developer', 'UX developer']);
+                userCubit.setUserActive(user);
+              },
             ),
             MaterialButton(
               color: Colors.blue,
@@ -25,7 +36,9 @@ class Page2 extends StatelessWidget {
                 'Change age',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                userCubit.changeAge(30);
+              },
             ),
             MaterialButton(
               color: Colors.blue,
@@ -33,7 +46,10 @@ class Page2 extends StatelessWidget {
                 'Add profession',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                String profession = 'Flutter Developer';
+                userCubit.addProfession(profession);
+              },
             ),
           ],
         ),
