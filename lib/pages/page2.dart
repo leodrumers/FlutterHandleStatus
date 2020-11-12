@@ -8,7 +8,7 @@ class Page2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserCubit userCubit = context.watch()<UserCubit>();
+    UserCubit userCubit = context.watch<UserCubit>();
 
     return Scaffold(
       appBar: AppBar(title: Text('Page2')),
