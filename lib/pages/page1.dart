@@ -1,12 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:managing_flutter_status/bloc/users/user_bloc.dart';
+import 'package:managing_flutter_status/models/user.dart';
 
 class Page1 extends StatelessWidget {
   static String routeName = '/loadingPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Page1')),
-      body: UserInformation(),
+      appBar: AppBar(
+        title: Text('Page1'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.exit_to_app),
+            onPressed: () {
+              BlocProvider.of<UserBloc>(context).add(DeleteUser());
+            },
+          )
+        ],
+      ),
+      body: BlocBuilder<UserBloc, UserState>(
+        builder: (_, state) {
+          if (state.userExist) {
+            return UserInformation(state.user);
+          } else {
+            return Center(child: Text('There\'s no user selected'));
+          }
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.forward),
         onPressed: () => Navigator.pushNamed(context, 'page2'),
@@ -16,6 +37,9 @@ class Page1 extends StatelessWidget {
 }
 
 class UserInformation extends StatelessWidget {
+  final User user;
+  UserInformation(this.user);
+
   @override
   Widget build(BuildContext context) {
     TextStyle _titleStyle =
@@ -30,13 +54,22 @@ class UserInformation extends StatelessWidget {
         children: [
           Text('General', style: _titleStyle),
           Divider(),
-          ListTile(title: Text('Name:', style: _listTileStyle)),
-          ListTile(title: Text('Age:', style: _listTileStyle)),
+          ListTile(
+            title: Text('Name:', style: _listTileStyle),
+            subtitle: Text(user.name),
+          ),
+          ListTile(
+            title: Text('Age:', style: _listTileStyle),
+            subtitle: Text(user.age.toString()),
+          ),
           Divider(),
           Text('Profession', style: _titleStyle),
           Divider(),
-          ListTile(title: Text('Profession1:', style: _listTileStyle)),
-          ListTile(title: Text('Profession2:', style: _listTileStyle)),
+          ...user.professions
+              .map((profession) => ListTile(
+                    title: Text(profession),
+                  ))
+              .toList()
         ],
       ),
     );

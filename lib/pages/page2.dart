@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:managing_flutter_status/bloc/users/user_bloc.dart';
+import 'package:managing_flutter_status/models/user.dart';
 
 class Page2 extends StatelessWidget {
   static final String routeName = 'page2';
 
   @override
   Widget build(BuildContext context) {
+    var userBloc = BlocProvider.of<UserBloc>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(title: Text('Page2')),
       body: Center(
@@ -17,7 +22,15 @@ class Page2 extends StatelessWidget {
                 'Set user',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                userBloc.add(
+                  ActiveUser(User(
+                    name: "leo",
+                    age: 29,
+                    professions: ["Flutter Developer"],
+                  )),
+                );
+              },
             ),
             MaterialButton(
               color: Colors.blue,
@@ -25,7 +38,11 @@ class Page2 extends StatelessWidget {
                 'Change age',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                userBloc.add(
+                  ChangeAge(30),
+                );
+              },
             ),
             MaterialButton(
               color: Colors.blue,
@@ -33,7 +50,9 @@ class Page2 extends StatelessWidget {
                 'Add profession',
                 style: TextStyle(color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                userBloc.add(AddProfession('Flutter'));
+              },
             ),
           ],
         ),
